@@ -1,0 +1,6 @@
+[book]
+authors = ["HugoPhi"]
+language = "en"
+multilingual = false
+src = "src"
+title = "My Blog"
