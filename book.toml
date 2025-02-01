@@ -1,6 +1,16 @@
 [book]
 authors = ["HugoPhi"]
-language = "en"
+language = "zh"
 multilingual = false
 src = "src"
 title = "My Blog"
+
+[output.html]
+theme = "theme"
+default-theme = "light"
+preferred-light-theme = "rust"
+git-repository-url = "https://github.com/HugoPhi/stl.rust"
+git-repository-icon = "fa-github"
+
+[preprocessor.katex]
+
