@@ -9,7 +9,7 @@ title = "Yunming Hu's Blog"
 theme = "theme"
 default-theme = "light"
 preferred-light-theme = "rust"
-git-repository-url = "https://github.com/HugoPhi/stl.rust"
+git-repository-url = "https://github.com/HugoPhi"
 git-repository-icon = "fa-github"
 
 [preprocessor.katex]
