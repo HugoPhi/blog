@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Deploy website by GatsBy - Yunming Hu&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Yunming Hu&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/HugoPhi" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<h1 id="我的个人网站与博客旧版网站已弃用"><a class="header" href="#我的个人网站与博客旧版网站已弃用">我的个人网站与博客（旧版网站，已弃用）</a></h1>
+<h2 id="1-这是如何运作的"><a class="header" href="#1-这是如何运作的">1. 这是如何运作的？</a></h2>
+<p>​	我的网站是使用 <a href="https://github.com/LekoArts/gatsby-themes">gatsby-themes</a> 生成的静态网站，并部署在 GitHub Pages 上，而我的博客是手写的，同样部署在 GitHub Pages 上。如果您不熟悉如何使用 GitHub Pages，可以参考这篇 <a href="https://docs.github.com/en/pages/quickstart">快速入门文章</a>。</p>
+<h2 id="2-部署步骤"><a class="header" href="#2-部署步骤">2. 部署步骤</a></h2>
+<h3 id="21-网站"><a class="header" href="#21-网站">2.1. 网站</a></h3>
+<h4 id="211-安装"><a class="header" href="#211-安装">2.1.1. 安装</a></h4>
+<ul>
+<li>克隆项目，删除 <code>.git</code> 并添加自己的 Git 仓库：</li>
+</ul>
+<pre><code class="language-bash">git clone https://github.com/LekoArts/gatsby-starter-portfolio-cara.git
+cd gatsby-starter-portfolio-cara
+rm -rf .git
+git init 
+git remote add origin 'your github page'
+</code></pre>
+<ul>
+<li>安装依赖：</li>
+</ul>
+<pre><code class="language-bash">npm install
+npm install gh-pages --save-dev
+</code></pre>
+<ul>
+<li>在 <code>package.json</code> 中添加脚本：</li>
+</ul>
+<pre><code class="language-json">"scripts": {
+    "develop": "gatsby develop",
+    "deploy": "gatsby build --prefix-paths &amp;&amp; gh-pages -d public",
+    "build": "gatsby build --prefix-paths"
+}
+</code></pre>
+<p>并修改 <code>gatsby-config.ts</code>，以下是一个可修改的模板：</p>
+<pre><code class="language-json">siteMetadata: {
+  siteTitle: `您的站点标题`,
+  siteTitleAlt: `您的站点副标题`,
+  siteHeadline: `对您的站点的简短描述`,
+  siteUrl: `https://您的域名.com`,
+  siteDescription: `适合SEO的站点描述`,
+  siteImage: `/您的图片.jpg`, 
+  siteLanguage: `zh`, 
+  author: `您的名字或昵称`,
+}
+</code></pre>
+<ul>
+<li>构建并部署。</li>
+<li>将分支设置为 <code>gh-pages</code>，作为部署分支。如果不清楚如何操作，可以咨询 GPT。</li>
+<li>在 <code>public</code> 文件夹下创建 CNAME 文件，内容为您的域名。</li>
+<li>重新构建并部署。</li>
+<li>然后您可以在自己的域名上看到模板网站。</li>
+</ul>
+<h4 id="212-项目结构与命令"><a class="header" href="#212-项目结构与命令">2.1.2. 项目结构与命令</a></h4>
+<p>​	网站是通过 gatsby-themes 生成的，整个过程很简单：编辑 <code>.mdx</code> 文件并运行几条命令即可。网站主要分为四个部分：介绍、项目、关于和联系。要编辑这些部分的内容，只需修改位于 <code>$project/src/@lekoarts/gatsby-theme-cara/sections</code> 文件夹下的 <code>.mdx</code> 文件即可，其中 <code>$project</code> 为您的项目文件夹。这些文件在构建时会被转换为 HTML 并合并到 <code>index.html</code> 中。然后通过 <code>npm run deploy</code> 命令即可部署。以下是常用命令及其用途：</p>
+<h5 id="npm-run-build"><a class="header" href="#npm-run-build"># npm run build</a></h5>
+<p>​	构建整个项目并将生成的文件放置到 <code>$project/public</code> 文件夹中。需要注意的是，在构建之前，请确保 <code>public</code> 文件夹中有一个 CNAME 文件，内容为您的域名。例如，我的域名是 <code>ohpostint.top</code>，CNAME 文件内容如下所示：</p>
+<p><img src="./assets/1.png" alt="CNAME 文件内容" /></p>
+<p><img src="./assets/2.png" alt="CNAME 内容示例" /></p>
+<h5 id="npm-run-develop"><a class="header" href="#npm-run-develop"># npm run develop</a></h5>
+<p>​	构建后，可以通过此命令在本地预览网站，同时实时编辑 <code>.mdx</code> 文件。例如，运行该命令后，点击 <a href="http://localhost:8000/">本地服务器链接</a> 即可在浏览器中查看。当修改 <code>.mdx</code> 文件时，例如 <code>intro.mdx</code>，更新会实时反映在浏览器中。</p>
+<p><img src="./assets/develop.gif" alt="开发模式实时预览" /></p>
+<h5 id="npm-run-deploy"><a class="header" href="#npm-run-deploy"># npm run deploy</a></h5>
+<p>​	调试完成后，通过此命令将网站部署到您的域名。</p>
+<h3 id="23-博客"><a class="header" href="#23-博客">2.3. 博客</a></h3>
+<p>​	我的博客不依赖代码生成工具。您只需使用 Typora 编写 Markdown 文件并导出为 HTML 文件（如 <code>index.html</code> 和 <code>index_zh.html</code>）。以下是撰写文章的步骤：</p>
+<h5 id="创建文章项目文件夹"><a class="header" href="#创建文章项目文件夹"># 创建文章项目文件夹</a></h5>
+<p>​	在我的博客中，每篇文章是一个独立的项目，这意味着您需要将文章相关的所有文件存放在同一个文件夹中。这些文件夹位于 <code>$project/post/</code> 中。例如，撰写一篇关于 PCA 算法的文章，步骤如下：</p>
+<pre><code class="language-bash">mkdir ./post/pca
+cd ./post/pca
+</code></pre>
+<h5 id="创建并编辑-indexmd"><a class="header" href="#创建并编辑-indexmd"># 创建并编辑 <code>index.md</code></a></h5>
+<p>​	进入文章项目文件夹后，即可开始撰写文章。如果文章中需要插图，请将图片放入 <code>$project/post/pca/asset/</code> 文件夹。</p>
+<h5 id="转换为-indexhtml"><a class="header" href="#转换为-indexhtml"># 转换为 <code>index.html</code></a></h5>
+<p>​	编辑完成后，将 <code>index.md</code> 转换为 <code>index.html</code>，我使用 Typora 的导出功能完成此步骤。</p>
+<h5 id="在首页中引用"><a class="header" href="#在首页中引用"># 在首页中引用</a></h5>
+<p>​	编辑项目根目录下的 <code>index.md</code>，在其中引用新文章。然后将根目录下的 <code>index.md</code> 转换为 <code>index.html</code>。</p>
+<h5 id="支持多语言"><a class="header" href="#支持多语言"># 支持多语言</a></h5>
+<p>​	可以为多语言支持创建 <code>index_xx.md</code> 文件，这里的'xx'指的是你的目标语言。比如中文：<code>index_zh.md</code>，然后重复2<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">∼</span></span></span></span>4。同时，你需要在每一个index文件的头部插入其它语言版本的跳转，比如在英文的index.md的头部要插入：</p>
+<pre><code class="language-markdown">中文版：[zh](./index_zh.md)
+</code></pre>
+<p>同样的在中文版的<code>index_zh.md</code>中插入：</p>
+<pre><code class="language-markdown">English: [en](./index.md)
+</code></pre>
+<p>由于我们的组织架构，这句话几乎是固定的，这也是我为什么选择这种结构，有点类似于B+树。</p>
+<h2 id="24-博客设计的思考"><a class="header" href="#24-博客设计的思考">2.4. 博客设计的思考</a></h2>
+<h3 id="241-项目结构是如何设计的"><a class="header" href="#241-项目结构是如何设计的">2.4.1. 项目结构是如何设计的？</a></h3>
+<p>​	首页的内容在项目根目录的 <code>index.html</code> 中编辑。文章位于 <code>$project/post/</code>，每篇文章的文件命名为 <code>index_*.html</code>，其中 <code>*</code> 用于支持多语言版本。因此，您可以轻松引用所有文章。在每个文章文件夹中，可以存放该文章的图片、动画等资源，而不会影响其他文章。</p>
+<h3 id="242-这种风格的设计来源是什么"><a class="header" href="#242-这种风格的设计来源是什么">2.4.2. 这种风格的设计来源是什么？</a></h3>
+<p>​	该风格受 <a href="https://sites.math.washington.edu//~morrow/mcm/mcm.html">这个网站</a> 和 Typora 主题 <a href="https://theme.typora.io/theme/Turing/">Turing</a> 的启发，符合极简主义设计风格。您可以在以下链接中获取相关 CSS 文件：index.css 和 hugo.css。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../other/other.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../other/markdown_snippets.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../other/other.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../other/markdown_snippets.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
