@@ -7,8 +7,7 @@ title = "Yunming Hu's Blog"
 
 [output.html]
 theme = "theme"
-default-theme = "light"
-preferred-light-theme = "rust"
+default-theme = "rust"
 git-repository-url = "https://github.com/HugoPhi"
 git-repository-icon = "fa-github"
 
