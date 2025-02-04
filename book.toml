@@ -3,7 +3,7 @@ authors = ["HugoPhi"]
 language = "zh"
 multilingual = false
 src = "src"
-title = "My Blog"
+title = "Yunming Hu's Blog"
 
 [output.html]
 theme = "theme"
@@ -13,4 +13,3 @@ git-repository-url = "https://github.com/HugoPhi/stl.rust"
 git-repository-icon = "fa-github"
 
 [preprocessor.katex]
-
