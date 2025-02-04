@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Other Topics - Yunming Hu&#x27;s Blog</title>
+        <title>Rust Lang - Yunming Hu&#x27;s Blog</title>
 
 
         <!-- Custom HTML head -->
@@ -156,17 +156,182 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-<h1 id="other-topics"><a class="header" href="#other-topics">Other Topics</a></h1>
+<h1 id="rust-lang"><a class="header" href="#rust-lang">Rust Lang</a></h1>
+<h2 id="1-为什么选择-rust"><a class="header" href="#1-为什么选择-rust">1. 为什么选择 Rust？</a></h2>
+<p>Rust 是一种系统编程语言，旨在提供内存安全性、并发性和高性能，同时避免传统系统编程语言（如 C 和 C++）中的常见问题，例如空指针解引用、内存泄漏和数据竞争。Rust 的设计哲学强调<strong>安全性</strong>、<strong>并发性</strong>和<strong>速度</strong>，使其成为构建高效且安全应用程序的理想选择。</p>
+<p>Rust 由 Mozilla 开发，并且是开源的。它的语法类似于现代编程语言，具有较高的表达能力。Rust 的核心特性之一是<strong>所有权</strong>与<strong>借用</strong>系统，它通过自动内存管理避免了垃圾回收（GC）的需求，从而避免了内存泄漏和悬空指针等问题。</p>
+<p>Rust 支持多种编程范式，包括面向对象编程（通过结构体和特性）、函数式编程（通过闭包和高阶函数）以及并发编程（使用轻量级线程和异步编程），从而提供了强大的表达能力和灵活性。</p>
+<h2 id="2--主要特性"><a class="header" href="#2--主要特性">2. 🔥 主要特性</a></h2>
+<ul>
+<li><strong>内存安全性</strong>：Rust 的所有权系统和借用检查器确保了内存安全，防止常见的内存问题，如悬空指针和内存泄漏。</li>
+<li><strong>并发性</strong>：Rust 的并发模型通过所有权、借用和锁机制消除了数据竞争，提供线程安全的并发支持。</li>
+<li><strong>零成本抽象</strong>：Rust 的抽象（如泛型、特性和闭包）具有极高的效率，几乎没有运行时开销，从而确保高执行性能。</li>
+<li><strong>现代语法</strong>：Rust 拥有现代、易于理解的语法，同时适用于低级系统编程。</li>
+<li><strong>无垃圾回收</strong>：Rust 通过所有权和生命周期管理内存，无需依赖垃圾回收器，从而实现更高的性能。</li>
+</ul>
+<h2 id="3-开始前需要了解的内容"><a class="header" href="#3-开始前需要了解的内容">3. 开始前需要了解的内容</a></h2>
+<p>在深入本指南之前，建议您对以下内容有基本的了解：</p>
+<ul>
+<li>Rust 的编译流程</li>
+<li>Cargo 包管理工具</li>
+<li>Rust 的基本语法：
+<ul>
+<li>变量声明
+<ul>
+<li>不可变变量 (<code>let</code>)</li>
+<li>可变变量 (<code>let mut</code>)</li>
+<li>常量 (<code>const</code>)</li>
+<li>类型推断</li>
+<li>显式类型声明</li>
+<li>解构赋值</li>
+</ul>
+</li>
+<li>数据类型
+<ul>
+<li>标量类型
+<ul>
+<li>整数类型 (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>i128</code>, <code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>u128</code>, <code>usize</code>, <code>isize</code>)</li>
+<li>浮点数类型 (<code>f32</code>, <code>f64</code>)</li>
+<li>布尔类型 (<code>bool</code>)</li>
+<li>字符类型 (<code>char</code>)</li>
+</ul>
+</li>
+<li>复合类型
+<ul>
+<li>元组 (<code>tuple</code>)</li>
+<li>数组 (<code>array</code>)</li>
+<li>切片 (<code>slice</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>控制流
+<ul>
+<li>条件语句：<code>if</code> 表达式、<code>else</code> 语句、<code>else if</code> 语句</li>
+<li>循环语句：<code>loop</code>，<code>while</code>，<code>for</code></li>
+<li>匹配表达式
+<ul>
+<li><code>match</code> 语句</li>
+<li>模式匹配</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>函数
+<ul>
+<li>函数声明
+<ul>
+<li>函数签名</li>
+<li>函数返回值</li>
+<li>多返回值（元组）</li>
+</ul>
+</li>
+<li>函数作用域
+<ul>
+<li>参数传递（按值 vs 按引用）</li>
+<li>匿名函数（闭包）</li>
+</ul>
+</li>
+<li>可变参数</li>
+</ul>
+</li>
+<li>所有权与借用
+<ul>
+<li>所有权
+<ul>
+<li>所有权转移</li>
+<li>借用所有权（不可变借用，可变借用）</li>
+</ul>
+</li>
+<li>借用
+<ul>
+<li>不可变借用 (<code>&amp;T</code>)</li>
+<li>可变借用 (<code>&amp;mut T</code>)</li>
+</ul>
+</li>
+<li>生命周期
+<ul>
+<li>生命周期注解</li>
+<li>生命周期推断</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>结构体
+<ul>
+<li>结构体定义
+<ul>
+<li>类似于面向对象中的类，但没有继承</li>
+<li>结构体字段定义</li>
+<li>结构体初始化</li>
+</ul>
+</li>
+<li>方法与关联函数
+<ul>
+<li><code>impl</code> 块</li>
+<li><code>self</code> 参数</li>
+</ul>
+</li>
+<li>结构体模式匹配</li>
+</ul>
+</li>
+<li>枚举
+<ul>
+<li>枚举定义
+<ul>
+<li>枚举变量</li>
+<li>包含数据的枚举类型（例如元组或结构体）</li>
+</ul>
+</li>
+<li><code>match</code> 语句与枚举</li>
+</ul>
+</li>
+<li>错误处理
+<ul>
+<li><code>Result</code> 枚举
+<ul>
+<li><code>Ok</code> 和 <code>Err</code></li>
+<li>错误传播（<code>?</code> 操作符）</li>
+</ul>
+</li>
+<li><code>Option</code> 枚举
+<ul>
+<li><code>Some</code> 和 <code>None</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>模块与包
+<ul>
+<li>模块系统 (<code>mod</code>)
+<ul>
+<li>文件模块</li>
+<li>嵌套模块</li>
+<li><code>use</code> 导入</li>
+</ul>
+</li>
+<li>包与依赖管理
+<ul>
+<li><code>Cargo.toml</code> 配置文件</li>
+<li>第三方库（Crates）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>建议您通过与大型语言模型的对话来熟悉这些语法概念。有关更详细的知识，可以参考<a href="https://rustwiki.org/zh-CN/book/">Rust 的官方文档</a>或阅读其源代码。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../rust/debug/1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ml/fomln.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../other/website_by_gatsby.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../rust/stl.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -176,11 +341,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../rust/debug/1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ml/fomln.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../other/website_by_gatsby.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../rust/stl.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
