@@ -5,7 +5,7 @@
 ---
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/23721e1b-0c3b-4ac1-abcb-e48cea7513d5" alt="image"/>
+  <img src="./assets/stl.rust.png" alt="image"/>
 </p>
 
 这是一个我手写Rust数据结构的项目，其主要特点是文档详尽，并且尽可能贴近与标准库的设计，后续会发布成一个包。
