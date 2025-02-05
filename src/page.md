@@ -6,8 +6,8 @@
 
 📚 **More Articles**
 
-- Website: https://hugophi.com
-- Blog: https://ohpostintm3.top
+- Website: [https://hugophi.com](https://hugophi.com)
+- Blog: [https://ohpostintm3.top](https://ohpostintm3.top)
 
 📧 **Contact Me**
 
