@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>关于生命周期 - Yunming Hu&#x27;s Blog</title>
+        <title>E0506 - Yunming Hu&#x27;s Blog</title>
 
 
         <!-- Custom HTML head -->
@@ -156,7 +156,33 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-<h1 id="关于生命周期"><a class="header" href="#关于生命周期">关于生命周期</a></h1>
+<h1 id="e0506-rust借用机制引发的一个小bug"><a class="header" href="#e0506-rust借用机制引发的一个小bug"><strong>E0506</strong>: Rust借用机制引发的一个小bug</a></h1>
+<h2 id="1-错误代码"><a class="header" href="#1-错误代码">1. 错误代码</a></h2>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let mut x = 5;
+    let y = &amp;x;
+    println!("{}{}", x, y);
+    x = 7;
+    println!("{}{}", x, y);
+}</code></pre></pre>
+<h2 id="2-解读"><a class="header" href="#2-解读">2. 解读</a></h2>
+<p>这里我们在借用被遗弃之前，对原来的变量进行了移动，这在rust中数不允许的。这段代码里，我们在最后一次使用<code>y</code>之前，把7移动给<code>x</code>了，因而就发生了报错。我认为这个行为可以用生命周期来解释：</p>
+<p>在Rust中，我们只需要保证：</p>
+<blockquote>
+<p><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8193em;vertical-align:-0.136em;"></span><span class="mord cjk_fallback">被引用者的生命周期</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">引用的生命周期</span></span></span></span></span></p>
+</blockquote>
+<p>这样做的目的无疑是防止悬空引用。另外：</p>
+<blockquote>
+<p>Rust的引用是绑定在数据上的而不是变量上。</p>
+</blockquote>
+<p>这里我们把y绑定在了数据5上，我们把7移动给<code>x</code>之后5就失去了所有者，此时推断5被释放，这时根据上面的规则，就不能再使用<code>y</code>了。
+其实这个问题是我在写链表的时候发现的，问题代码如下：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let wraped_ptr = self.head.clone();  // 辅助指针
+wraped_ptr = wraped_ptr.as_ref().unwrap().borrow().next.clone();
+<span class="boring">}</span></code></pre></pre>
+<p>这里会和给出的代码报一样的错，原因是：我们在右边临时借用了<code>wraped_ptr</code>所指向的数据，此时它的生命周期是本行。然而我们在本行内修改了<code>wraped_ptr</code>的值，这里编译器会推断出<code>wraped_ptr</code>所拥有的数据被释放（就是原来的指针变成了next的指针），因而产生报错。</p>
 
                     </main>
 
@@ -166,7 +192,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../other/other.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../rust/debug/2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -180,7 +206,7 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../other/other.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../rust/debug/2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
